@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+/* Hero Section */
+
+.hero-background {
+  background: url(asset-path('family_background.jpg')) center center / cover no-repeat;
+  min-height: 100vh;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
+}
+

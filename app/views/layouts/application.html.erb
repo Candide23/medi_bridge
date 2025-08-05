@@ -4,21 +4,34 @@
     <title>MediBridge</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- Bootstrap (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+
+    <!-- Custom Styles -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <%= render "shared/navbar" %>
-    <div class="container mt-4">
-      <% if notice %>
-        <div class="alert alert-info"><%= notice %></div>
-      <% end %>
-      <% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
-      <% end %>
+
+    <%# Homepage gets full-screen layout, others get container %>
+    <% if current_page?(root_path) %>
       <%= yield %>
-    </div>
+    <% else %>
+      <div class="container mt-4">
+        <% if notice %>
+          <div class="alert alert-info"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>
+
 
