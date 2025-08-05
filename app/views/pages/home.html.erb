@@ -1,11 +1,11 @@
-<div class="d-flex justify-content-center align-items-center text-white text-center" style="height: 100vh; background: url(<%= asset_path('family_background.jpg') %>) no-repeat center center / cover;">
-  <div class="bg-dark bg-opacity-50 p-5 rounded">
+<div class="d-flex justify-content-center align-items-center text-white text-center" style="height: 100vh; background: url(<%= asset_path('family_background.jpg') %>) center center / cover no-repeat;">
+  <div class="bg-dark bg-opacity-75 p-5 rounded shadow">
     <h1 class="display-4 fw-bold">Welcome to MediBridge</h1>
     <p class="lead">Multilingual health record management for you and your loved ones.</p>
     <% if user_signed_in? %>
       <%= link_to "Go to Dashboard", health_records_path, class: "btn btn-light btn-lg mt-3" %>
     <% else %>
-      <%= link_to "Get Started", new_user_registration_path, class: "btn btn-light btn-lg mt-3" %>
+      <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg mt-3" %>
     <% end %>
   </div>
 </div>
