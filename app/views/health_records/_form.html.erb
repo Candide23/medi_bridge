@@ -1,32 +1,14 @@
-<%= form_with(model: health_record) do |form| %>
-  <% if health_record.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(health_record.errors.count, "error") %> prohibited this health_record from being saved:</h2>
-
-      <ul>
-        <% health_record.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :record_type, style: "display: block" %>
-    <%= form.number_field :record_type %>
+<%= form_with(model: health_record, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :record_type %>
+    <%= form.select :record_type, HealthRecord.record_types.keys.map { |type| [type.titleize, type] }, {}, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.label :language, style: "display: block" %>
-    <%= form.text_field :language %>
+  <div class="mb-3">
+    <%= form.label :language %>
+    <%= form.select :language, [["English", "english"], ["French", "french"], ["Spanish", "spanish"]], {}, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: "btn btn-primary" %>
 <% end %>
+
