@@ -11,9 +11,20 @@ class HealthRecordsController < ApplicationController
   end
 
   # GET /health_records/new
-  def new
-    @health_record = HealthRecord.new
+def create
+  @health_record = current_user.health_records.new(health_record_params)
+
+  respond_to do |format|
+    if @health_record.save
+      format.html { redirect_to @health_record, notice: "Health record was successfully created." }
+      format.json { render :show, status: :created, location: @health_record }
+    else
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @health_record.errors, status: :unprocessable_entity }
+    end
   end
+end
+
 
   # GET /health_records/1/edit
   def edit

@@ -17,21 +17,31 @@
   <body class="d-flex flex-column min-vh-100">
     <%= render "shared/navbar" %>
 
-    <%# Homepage gets full-screen layout, others get container %>
-    <% if current_page?(root_path) %>
-      <%= yield %>
-    <% else %>
-      <div class="container mt-4">
-        <% if notice %>
-          <div class="alert alert-info"><%= notice %></div>
+    <%# Show all flash messages except "Signed in successfully." UNLESS on dashboard %>
+    <% if flash.any? %>
+      <% flash.each do |type, message| %>
+        <% if message != "Signed in successfully." || current_page?(health_records_path) %>
+          <% bootstrap_class = type == "notice" ? "info" : "danger" %>
+          <div class="alert alert-<%= bootstrap_class %> alert-dismissible fade show m-3" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         <% end %>
-        <% if alert %>
-          <div class="alert alert-danger"><%= alert %></div>
-        <% end %>
-        <%= yield %>
-      </div>
+      <% end %>
     <% end %>
+
+    <main class="flex-grow-1">
+      <% if current_page?(root_path) %>
+        <%= yield %>
+      <% else %>
+        <div class="container mt-4">
+          <%= yield %>
+        </div>
+      <% end %>
+    </main>
   </body>
 </html>
+
+
 
 

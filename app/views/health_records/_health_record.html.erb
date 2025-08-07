@@ -1,17 +1,28 @@
-<div id="<%= dom_id health_record %>">
-  <p>
-    <strong>Record type:</strong>
-    <%= health_record.record_type %>
-  </p>
+<h2><%= @health_record.record_type.titleize %> - <%= @health_record.language.upcase %></h2>
 
-  <p>
-    <strong>Language:</strong>
-    <%= health_record.language %>
-  </p>
+<ul class="nav nav-tabs mb-3" id="recordTabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="original-tab" data-bs-toggle="tab" data-bs-target="#original" type="button" role="tab">Original</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="translated-tab" data-bs-toggle="tab" data-bs-target="#translated" type="button" role="tab">Translated</button>
+  </li>
+</ul>
 
-  <p>
-    <strong>User:</strong>
-    <%= health_record.user_id %>
-  </p>
+<div class="tab-content" id="recordTabsContent">
+  <div class="tab-pane fade show active" id="original" role="tabpanel">
+    <p>Original language: <strong><%= @health_record.language.upcase %></strong></p>
+  </div>
 
+  <div class="tab-pane fade" id="translated" role="tabpanel">
+    <% if @health_record.translations.any? %>
+      <% @health_record.translations.each do |t| %>
+        <p><strong><%= t.language.upcase %>:</strong></p>
+        <p><%= simple_format(t.content) %></p>
+      <% end %>
+    <% else %>
+      <p class="text-muted">No translations available yet.</p>
+    <% end %>
+  </div>
 </div>
+

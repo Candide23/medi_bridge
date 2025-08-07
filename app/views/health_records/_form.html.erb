@@ -1,14 +1,15 @@
-<%= form_with(model: health_record, local: true) do |form| %>
+<%= form_with model: @health_record, local: true do |form| %>
   <div class="mb-3">
     <%= form.label :record_type %>
-    <%= form.select :record_type, HealthRecord.record_types.keys.map { |type| [type.titleize, type] }, {}, class: "form-select" %>
+    <%= form.select :record_type, ["Prescription", "Vaccination", "Doctor Note"], {}, class: "form-select" %>
   </div>
 
   <div class="mb-3">
     <%= form.label :language %>
-    <%= form.select :language, [["English", "english"], ["French", "french"], ["Spanish", "spanish"]], {}, class: "form-select" %>
+    <%= form.select :language, ["English", "Spanish", "French"], {}, class: "form-select" %>
   </div>
 
-  <%= form.submit class: "btn btn-primary" %>
+  <%= form.submit "Create Health record", class: "btn btn-primary" %>
 <% end %>
+
 

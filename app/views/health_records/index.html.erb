@@ -1,14 +1,36 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold">Your Health Records</h1>
+    <%= link_to "Upload New Record", new_health_record_path, class: "btn btn-primary" %>
+  </div>
 
-<h1>Health records</h1>
-
-<div id="health_records">
-  <% @health_records.each do |health_record| %>
-    <%= render health_record %>
-    <p>
-      <%= link_to "Show this health record", health_record %>
-    </p>
+  <% if @health_records.any? %>
+    <div class="table-responsive shadow-sm">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Document Type</th>
+            <th scope="col">Language</th>
+            <th scope="col" class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @health_records.each do |record| %>
+            <tr>
+              <td><%= record.record_type %></td>
+              <td><%= record.language %></td>
+              <td class="text-center">
+                <%= link_to "View", health_record_path(record), class: "btn btn-outline-info btn-sm me-2" %>
+                <%= link_to "Delete", record, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="alert alert-info text-center">
+      You have no health records yet. Click "Upload New Record" to get started.
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New health record", new_health_record_path %>
