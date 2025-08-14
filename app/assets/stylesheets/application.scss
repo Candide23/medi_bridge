@@ -16,12 +16,20 @@
 /* Hero Section */
 
 .hero-background {
-  background: url(asset-path('family_background.jpg')) center center / cover no-repeat;
-  min-height: 100vh;
+  background-image: url(asset-path('family_background.jpg')); // Or use a relative path
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
 }
 
 .hero-overlay {
-  background-color: rgba(0, 0, 0, 0.6);
-  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.5); // dark overlay
 }
+
+.text-shadow {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+
 
