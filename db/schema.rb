@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_14_182854) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_192947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_182854) do
   end
 
   create_table "health_records", force: :cascade do |t|
-    t.integer "record_type"
+    t.string "record_type"
     t.string "language"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
