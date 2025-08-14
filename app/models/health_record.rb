@@ -4,6 +4,28 @@ class HealthRecord < ApplicationRecord
 
   has_one_attached :document, dependent: :purge_later
 
+    RECORD_TYPES = [
+    "Lab Result",
+    "Prescription",
+    "Immunization",
+    "Visit Summary",
+    "Imaging",
+    "Allergy",
+    "Referral",
+    "Insurance"
+  ].freeze
+
+  LANGUAGES = [
+    "English",
+    "French",
+    "Spanish",
+    "Portuguese",
+    "Arabic",
+    "Chinese",
+    "Lingala",
+    "Swahili"
+  ].freeze
+
   validates :record_type, :language, presence: true
   validate  :document_type_and_size
 
