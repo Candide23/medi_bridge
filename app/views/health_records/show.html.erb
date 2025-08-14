@@ -1,10 +1,48 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="fw-bold"><%= @health_record.record_type %></h1>
+    <%= link_to "Back", health_records_path, class: "btn btn-outline-secondary" %>
+  </div>
 
-<%= render @health_record %>
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white"><h5 class="mb-0">Document</h5></div>
+        <div class="card-body">
+          <% if @health_record.document.attached? %>
+            <% if @health_record.document.image? %>
+              <%= image_tag @health_record.document, class: "img-fluid rounded mb-3" %>
+            <% elsif @health_record.document.content_type == "application/pdf" %>
+              <iframe src="<%= url_for(@health_record.document) %>" class="w-100" style="height:600px;border:1px solid #e9ecef;border-radius:.5rem;"></iframe>
+            <% else %>
+              <p class="text-muted mb-3">Preview not available for this file type.</p>
+            <% end %>
 
-<div>
-  <%= link_to "Edit this health record", edit_health_record_path(@health_record) %> |
-  <%= link_to "Back to health records", health_records_path %>
+            <div class="d-flex gap-2">
+              <%= link_to "Download",
+                  rails_blob_path(@health_record.document, disposition: "attachment"),
+                  class: "btn btn-primary" %>
+              <%= link_to "Replace File", edit_health_record_path(@health_record), class: "btn btn-outline-secondary" %>
+            </div>
+          <% else %>
+            <p class="text-muted mb-0">No document attached.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-  <%= button_to "Destroy this health record", @health_record, method: :delete %>
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white"><h5 class="mb-0">Details</h5></div>
+        <div class="card-body">
+          <dl class="row mb-0">
+            <dt class="col-4">Language</dt>
+            <dd class="col-8"><%= @health_record.language.presence || "—" %></dd>
+            <dt class="col-4">Owner</dt>
+            <dd class="col-8"><%= @health_record.user.email %></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
