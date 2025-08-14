@@ -1,0 +1,14 @@
+<%= form_with(model: [health_record, translation], local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :language %>
+    <%= form.text_field :language, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :content %>
+    <%= form.text_area :content, class: "form-control", rows: 6 %>
+  </div>
+
+  <%= form.submit class: "btn btn-success" %>
+<% end %>
+

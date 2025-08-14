@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    # Redirect to dashboard after login
+  def after_sign_in_path_for(resource)
+    health_records_path
+  end
+
   def configure_permitted_parameters
     added_attrs = [:first_name, :last_name, :email, :preferred_language, :password, :password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
