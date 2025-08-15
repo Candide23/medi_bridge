@@ -5,9 +5,9 @@
   </div>
 
   <% if @health_records.blank? %>
-    <div class="alert alert-info d-flex align-items-center" role="alert">
-      <div>No records yet.</div>
-      <%= link_to "Upload one now", new_health_record_path, class: "btn btn-sm btn-primary ms-3" %>
+    <div class="alert alert-info d-flex justify-content-between align-items-center px-4 py-3 shadow-sm">
+      <span>You have no health records yet.</span>
+      <%= link_to "Upload One Now", new_health_record_path, class: "btn btn-sm btn-primary" %>
     </div>
   <% else %>
     <div class="table-responsive shadow-sm">
@@ -23,13 +23,11 @@
         <tbody>
           <% @health_records.each do |record| %>
             <tr>
-              <td><%= record.record_type %></td>
-              <td><%= record.language %></td>
+              <td><%= record.record_type.titleize %></td>
+              <td><%= record.language.capitalize %></td>
               <td>
                 <% if record.document.attached? %>
-                  <%= link_to "Download",
-                    rails_blob_path(record.document, disposition: "attachment"),
-                    class: "btn btn-sm btn-outline-primary" %>
+                  <%= link_to "Download", rails_blob_path(record.document, disposition: "attachment"), class: "btn btn-sm btn-outline-primary" %>
                 <% else %>
                   <span class="text-muted">No file</span>
                 <% end %>
@@ -37,10 +35,11 @@
               <td class="text-center">
                 <%= link_to "Show", record, class: "btn btn-sm btn-light" %>
                 <%= link_to "Edit", edit_health_record_path(record), class: "btn btn-sm btn-outline-secondary" %>
-                <%= link_to "Delete", record,
-                      data: { turbo_method: :delete, turbo_confirm: "Delete this record?" },
+                <%= button_to "Delete", record, method: :delete,
+                      data: { confirm: "Delete this record?" },
                       class: "btn btn-sm btn-outline-danger" %>
               </td>
+
             </tr>
           <% end %>
         </tbody>

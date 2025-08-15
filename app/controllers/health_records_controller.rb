@@ -30,8 +30,9 @@ class HealthRecordsController < ApplicationController
   end
 
   def destroy
-    @health_record.destroy
-    redirect_to health_records_path, notice: "Health record deleted."
+    @health_record = current_user.health_records.find(params[:id])
+  @health_record.destroy
+  redirect_to health_records_path, notice: "Record deleted successfully."
   end
 
   private
