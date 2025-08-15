@@ -24,6 +24,31 @@
   position: relative;
 }
 
+.navbar-brand {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.9;
+  }
+}
+
+.nav-item .btn {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.avatar {
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
 .records-page {
   background: linear-gradient(135deg, #7f7fd5, #86a8e7, #91eae4);
   min-height: 100vh;
