@@ -72,8 +72,73 @@
 }
 
 
+// ==== Animated Background ====
 
+.animated-gradient {
+  background: linear-gradient(-45deg, #6a8dff, #9ce8dd, #a1c4fd, #89f7fe);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// ==== Card UI ====
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+// ==== Buttons ====
+
+.btn-primary {
+  background-color: #6a8dff;
+  border-color: #6a8dff;
+}
+
+.btn-primary:hover {
+  background-color: #5575e0;
+  border-color: #4f6fd3;
+}
+
+.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+// ==== Typography ====
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.form-label {
+  font-weight: 600;
+}
 
 
 

@@ -1,48 +1,44 @@
-<%= form_with(model: health_record, local: true, html: { multipart: true }) do |f| %>
-  <% if health_record.errors.any? %>
-    <div class="alert alert-danger">
-      <%= health_record.errors.full_messages.to_sentence %>
-    </div>
-  <% end %>
+<div class="animated-gradient d-flex align-items-center justify-content-center">
+  <div class="card glass-card p-4" style="max-width: 700px; width: 100%;">
+    <h2 class="fw-bold text-center mb-1">New Health Record</h2>
+    <p class="text-center text-muted mb-4">Upload and organize your medical documents securely</p>
 
-  <div class="card shadow-sm border-0 mb-4">
-    <div class="card-header bg-white">
-      <h5 class="mb-0 fw-semibold">Upload Health Record</h5>
-    </div>
-
-    <div class="card-body">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <%= f.label :record_type, class: "form-label fw-semibold" %>
-          <%= f.select :record_type,
-                options_for_select(HealthRecord::RECORD_TYPES, f.object.record_type),
-                { prompt: "Choose a document type" },
-                class: "form-select", required: true %>
-        </div>
-
-        <div class="col-md-6">
-          <%= f.label :language, class: "form-label fw-semibold" %>
-          <%= f.select :language,
-                options_for_select(HealthRecord::LANGUAGES, f.object.language),
-                { prompt: "Choose a language" },
-                class: "form-select", required: true %>
-        </div>
-
-        <div class="col-12">
-          <%= f.label :document, "Attach Document (PDF/Image)", class: "form-label fw-semibold" %>
-          <%= f.file_field :document, class: "form-control", direct_upload: true,
-                accept: ".pdf,image/*,text/plain" %>
-          <div class="form-text">Max 25 MB. PDF, PNG, JPEG, or TXT.</div>
+    <%= form_with(model: health_record, local: true, html: { multipart: true }) do |form| %>
+      <div class="mb-4">
+        <h5 class="fw-semibold">Record Information</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <%= form.label :record_type, "Record Type", class: "form-label" %>
+            <%= form.select :record_type, options_for_select(HealthRecord::RECORD_TYPES), {}, class: "form-select" %>
+          </div>
+          <div class="col-md-6">
+            <%= form.label :language, "Language", class: "form-label" %>
+            <%= form.select :language, options_for_select(HealthRecord::LANGUAGES), {}, class: "form-select" %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="card-footer bg-white d-flex justify-content-end gap-2">
-      <%= link_to "Cancel", health_records_path, class: "btn btn-outline-secondary" %>
-      <%= f.submit (health_record.new_record? ? "Upload" : "Update"), class: "btn btn-primary px-4" %>
-    </div>
+      <div class="mb-4">
+        <h5 class="fw-semibold">Document Upload</h5>
+        <div class="border border-dashed border-2 rounded p-4 text-center bg-light">
+          <i class="bi bi-upload display-4 text-primary"></i>
+          <p class="fw-semibold mb-1">Drag & drop your file here</p>
+          <p class="text-muted small mb-2">or click to browse files</p>
+          <%= form.file_field :document, class: "form-control" %>
+          <p class="small text-muted mt-2">Max 25 MB. Supported formats: PDF, PNG, JPG, JPEG, TXT.</p>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mt-4">
+        <%= link_to "Cancel", health_records_path, class: "btn btn-outline-secondary" %>
+        <%= form.submit "Upload Record", class: "btn btn-primary px-4" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
+
+
+
 
 
 
