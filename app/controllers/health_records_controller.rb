@@ -29,11 +29,16 @@ class HealthRecordsController < ApplicationController
     end
   end
 
-  def destroy
-    @health_record = current_user.health_records.find(params[:id])
+def destroy
+  @health_record = HealthRecord.find(params[:id])
   @health_record.destroy
-  redirect_to health_records_path, notice: "Record deleted successfully."
+  
+  respond_to do |format|
+    format.html { redirect_to health_records_path, notice: 'Record was successfully deleted.' }
+    format.json { head :no_content }
   end
+end
+
 
   private
 
