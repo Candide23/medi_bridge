@@ -140,6 +140,22 @@
   font-weight: 600;
 }
 
+body {
+  background: linear-gradient(to bottom right, #6a8dff, #8e56d3);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
 
 
 
