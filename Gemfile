@@ -70,3 +70,8 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "image_processing", "~> 1.14"
+
+gem "cloudinary", "~> 2.3"
+gem "activestorage-cloudinary-service", "~> 0.2.3"

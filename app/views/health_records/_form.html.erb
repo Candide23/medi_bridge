@@ -1,15 +1,38 @@
-<%= form_with model: @health_record, local: true do |form| %>
-  <div class="mb-3">
-    <%= form.label :record_type %>
-    <%= form.select :record_type, ["Prescription", "Vaccination", "Doctor Note"], {}, class: "form-select" %>
-  </div>
+<div class="d-flex align-items-center justify-content-center min-vh-100 bg-light py-5 px-3">
+  <div class="card p-4 shadow-sm rounded-3" style="max-width: 700px; width: 100%;">
+    <h2 class="fw-bold text-center mb-1">New Health Record</h2>
+    <p class="text-center text-muted mb-4">Upload and organize your medical documents securely</p>
 
-  <div class="mb-3">
-    <%= form.label :language %>
-    <%= form.select :language, ["English", "Spanish", "French"], {}, class: "form-select" %>
-  </div>
+    <%= form_with model: @health_record, url: health_records_path, local: true, html: { multipart: true } do |form| %>
+      <div class="mb-4">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <%= form.label :record_type, "Record Type", class: "form-label" %>
+            <%= form.select :record_type, HealthRecord::RECORD_TYPES, {}, class: "form-select" %>
+          </div>
+          <div class="col-md-6">
+            <%= form.label :language, "Language", class: "form-label" %>
+            <%= form.select :language, HealthRecord::LANGUAGES, {}, class: "form-select" %>
+          </div>
+        </div>
+      </div>
 
-  <%= form.submit "Create Health record", class: "btn btn-primary" %>
-<% end %>
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Upload Document</label>
+        <%= form.file_field :document, class: "form-control", required: true %>
+        <small class="form-text text-muted">Max 25 MB. PDF, PNG, JPG, JPEG, or TXT only.</small>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <%= link_to "Cancel", health_records_path, class: "btn btn-outline-secondary" %>
+        <%= form.submit "Upload Record", class: "btn btn-primary px-4" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
 
 
