@@ -25,7 +25,15 @@ gem "stimulus-rails"
 
 gem 'sassc-rails'
 
+# Add these gems
+gem 'rtesseract'
+gem 'pdf-reader'
+gem 'google-cloud-translate'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
+
+gem 'sidekiq' # if not already present
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
