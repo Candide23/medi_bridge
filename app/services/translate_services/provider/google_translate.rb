@@ -1,4 +1,4 @@
-module Translation
+module TranslateServices
   module Provider
     class GoogleTranslate
       include ActiveModel::Model

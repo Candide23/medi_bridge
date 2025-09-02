@@ -1,4 +1,4 @@
-module Translation
+module TranslateServices
   class TranslationService
     include ActiveModel::Model
     
@@ -56,7 +56,7 @@ module Translation
     end
     
     def supported_locale?(locale)
-      SUPPORTED_LANGUAGES.any? { |_, code| code == locale }
+      HealthRecord::SUPPORTED_LANGUAGES.any? { |_, code| code == locale }
     end
     
     def success(translation)

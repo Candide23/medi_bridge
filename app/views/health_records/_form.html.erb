@@ -12,7 +12,7 @@
           </div>
           <div class="col-md-6">
             <%= form.label :language, "Language", class: "form-label" %>
-            <%= form.select :language, HealthRecord::LANGUAGES, {}, class: "form-select" %>
+            <%= form.select :language, HealthRecord::SUPPORTED_LANGUAGES, {}, class: "form-select" %>
           </div>
         </div>
       </div>
