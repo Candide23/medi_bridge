@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4 translation-feature">
   <div class="row">
     <div class="col-md-12">
       <!-- Header with language info -->
@@ -9,19 +9,19 @@
             <span class="badge bg-secondary"><%= @health_record.language_name %></span>
           </h2>
         </div>
-        
+
         <!-- Language Toggle Dropdown -->
-        <div class="dropdown">
+        <div class="dropdown language-toggle">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
             View Language: <%= language_name(@current_view_language) %>
           </button>
           <ul class="dropdown-menu">
-            <li><%= link_to "Original (#{@health_record.language_name})", 
-                    toggle_view_health_record_path(@health_record, language: @health_record.language), 
+            <li><%= link_to "Original (#{@health_record.language_name})",
+                    toggle_view_health_record_path(@health_record, language: @health_record.language),
                     class: "dropdown-item" %></li>
             <% @available_translations.each do |lang| %>
-              <li><%= link_to "#{language_name(lang)}", 
-                      toggle_view_health_record_path(@health_record, language: lang), 
+              <li><%= link_to "#{language_name(lang)}",
+                      toggle_view_health_record_path(@health_record, language: lang),
                       class: "dropdown-item" %></li>
             <% end %>
             <li><hr class="dropdown-divider"></li>
@@ -31,17 +31,17 @@
           </ul>
         </div>
       </div>
-      
+
       <!-- Translation Banner -->
       <% if @translation %>
-        <div class="alert alert-info">
+        <div class="alert alert-info translation-banner">
           <i class="bi bi-translate"></i>
           Translated from <%= @health_record.language_name %> to <%= language_name(@current_view_language) %>
         </div>
       <% end %>
-      
+
       <!-- Content Panels -->
-      <div class="row">
+      <div class="row content-panels">
         <!-- Original Content -->
         <div class="col-md-6">
           <div class="card">
@@ -52,12 +52,12 @@
               <% if @health_record.document.attached? %>
                 <p><strong>File:</strong> <%= @health_record.document.filename %></p>
                 <%= link_to "Download Original", @health_record.document, class: "btn btn-sm btn-outline-primary" %>
-                
+
                 <% if @health_record.text_cache.present? %>
                   <hr>
                   <h6>Extracted Text:</h6>
                   <div class="extracted-text" style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 5px;">
-                    <%= simple_format(@health_record.text_cache) %>
+                    <%= simple_format(@health_record.text_cache.gsub(/\[DEMO OCR\]\s*/, '')) %>
                   </div>
                 <% end %>
               <% else %>
@@ -66,7 +66,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Translated Content -->
         <div class="col-md-6">
           <div class="card">
@@ -78,12 +78,30 @@
                   Translation
                 <% end %>
               </h5>
+
+              <% if @translation %>
+                <div class="btn-group" role="group">
+                  <!-- UPDATED -->
+                  <%= link_to "Download Translation",
+                              download_translation_path(@translation),
+                              class: "btn btn-sm btn-outline-success" %>
+                  <%= link_to "View Details",
+                              translation_path(@translation),
+                              class: "btn btn-sm btn-outline-info" %>
+                </div>
+              <% end %>
             </div>
             <div class="card-body">
               <% if @translation %>
                 <div class="translation-content" style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 5px;">
-                  <%= simple_format(@translation.content) %>
+                  <%= simple_format(@translation.content.gsub(/\[DEMO TRANSLATION\]\s*/, '')) %>
                 </div>
+
+                <hr>
+                <small class="text-muted">
+                  <strong>Translation ID:</strong> <%= @translation.id %> |
+                  <strong>Created:</strong> <%= @translation.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                </small>
               <% else %>
                 <p class="text-muted">No translation available for this language.</p>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#translateModal">
@@ -94,7 +112,40 @@
           </div>
         </div>
       </div>
-      
+
+      <!-- Available Translations Summary -->
+      <% if @health_record.translations.any? %>
+        <div class="row mt-4 translation-summary">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h6>All Available Translations</h6>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <% @health_record.translations.each do |translation| %>
+                    <div class="col-md-4 mb-2">
+                      <div class="d-flex justify-content-between align-items-center p-2 border rounded">
+                        <span><%= translation.language_name %></span>
+                        <div>
+                          <%= link_to "View",
+                                      toggle_view_health_record_path(@health_record, language: translation.language),
+                                      class: "btn btn-xs btn-outline-primary me-1" %>
+                          <!-- UPDATED -->
+                          <%= link_to "Download",
+                                      download_translation_path(translation),
+                                      class: "btn btn-xs btn-outline-success" %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
       <!-- Action Buttons -->
       <div class="mt-4">
         <%= link_to "Edit", edit_health_record_path(@health_record), class: "btn btn-warning" %>
@@ -116,10 +167,10 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="target_locale" class="form-label">Target Language</label>
-            <%= select_tag :target_locale, 
-                options_for_select(HealthRecord::SUPPORTED_LANGUAGES.reject { |_, code| 
-                  code == @health_record.language || @available_translations.include?(code) 
-                }), 
+            <%= select_tag :target_locale,
+                options_for_select(HealthRecord::SUPPORTED_LANGUAGES.reject { |_, code|
+                  code == @health_record.language || @available_translations.include?(code)
+                }),
                 { class: "form-select", required: true } %>
           </div>
         </div>
@@ -131,3 +182,4 @@
     </div>
   </div>
 </div>
+

@@ -1,70 +1,64 @@
+# app/controllers/translations_controller.rb
 class TranslationsController < ApplicationController
-  before_action :set_translation, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :set_translation, only: %i[show edit update destroy download]
 
-  # GET /translations or /translations.json
   def index
-    @translations = Translation.all
+    @translations = current_user.translations
   end
 
-  # GET /translations/1 or /translations/1.json
   def show
+    # renders app/views/translations/show.html.erb
   end
 
-  # GET /translations/new
+  def download
+    # Send raw text as a file, no layout, no respond_to
+    send_data @translation.content.to_s,
+              filename: "translation_#{@translation.language}_#{Date.current}.txt",
+              type: "text/plain",
+              disposition: "attachment"
+  end
+
   def new
     @translation = Translation.new
   end
 
-  # GET /translations/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /translations or /translations.json
   def create
     @translation = Translation.new(translation_params)
-
-    respond_to do |format|
-      if @translation.save
-        format.html { redirect_to @translation, notice: "Translation was successfully created." }
-        format.json { render :show, status: :created, location: @translation }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @translation.errors, status: :unprocessable_entity }
-      end
+    if @translation.save
+      redirect_to @translation, notice: "Translation was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /translations/1 or /translations/1.json
   def update
-    respond_to do |format|
-      if @translation.update(translation_params)
-        format.html { redirect_to @translation, notice: "Translation was successfully updated." }
-        format.json { render :show, status: :ok, location: @translation }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @translation.errors, status: :unprocessable_entity }
-      end
+    if @translation.update(translation_params)
+      redirect_to @translation, notice: "Translation was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /translations/1 or /translations/1.json
   def destroy
     @translation.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to translations_path, status: :see_other, notice: "Translation was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to translations_path, status: :see_other, notice: "Translation was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_translation
-      @translation = Translation.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def translation_params
-      params.require(:translation).permit(:language, :content, :health_record_id)
+  def set_translation
+    @translation = Translation.find(params[:id])
+    unless @translation.health_record.user_id == current_user.id
+      redirect_to root_path, alert: "Access denied." and return
     end
+  end
+
+  def translation_params
+    params.require(:translation).permit(:language, :content, :health_record_id)
+  end
 end
+
+

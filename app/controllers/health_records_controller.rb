@@ -14,29 +14,28 @@ class HealthRecordsController < ApplicationController
     @available_translations = @health_record.translations.pluck(:language)
   end
 
-  def translate
-    target_locale = params[:target_locale] || current_user.preferred_language || 'en'
-    
-    if @health_record.has_translation?(target_locale)
-      redirect_to @health_record, notice: "Translation already exists for #{language_name(target_locale)}"
-      return
-    end
-    
-    # For now, run translation immediately (you can add background jobs later)
-    # TranslationJob.perform_later(@health_record.id, target_locale, current_user.id)
-    
-    # Immediate translation (simpler for testing)
-     result = TranslateServices::TranslationService.new(
-      health_record: @health_record,
-      target_locale: target_locale
-    ).call
-    
-    if result&.success?
-      redirect_to @health_record, notice: "Translation to #{language_name(target_locale)} completed!"
-    else
-      redirect_to @health_record, alert: "Translation failed. Please try again."
-    end
+def translate
+  target_locale = params[:target_locale] || current_user.preferred_language || 'en'
+  
+  if @health_record.has_translation?(target_locale)
+    redirect_to @health_record, notice: "Translation already exists for #{language_name(target_locale)}"
+    return
   end
+  
+  result = TranslateServices::TranslationService.new(
+    health_record: @health_record,
+    target_locale: target_locale
+  ).call
+  
+  if result&.success?
+    # Set session to show the new translation
+    session[:view_language] = target_locale
+    redirect_to @health_record, notice: "Translation to #{language_name(target_locale)} completed!"
+  else
+    redirect_to @health_record, alert: "Translation failed. Please try again."
+  end
+end
+
 
   def toggle_view
     session[:view_language] = params[:language] || @health_record.language

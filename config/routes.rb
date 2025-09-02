@@ -10,6 +10,14 @@ Rails.application.routes.draw do
       get :toggle_view     # GET /health_records/:id/toggle_view
     end
   end
+
+  # config/routes.rb
+resources :translations, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  member do
+    get :download
+  end
+end
+
   
   resources :translations
 
