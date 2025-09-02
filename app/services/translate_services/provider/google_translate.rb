@@ -1,43 +1,32 @@
-require 'google/cloud/translate/v2'
-
 module TranslateServices
   module Provider
     class GoogleTranslate
-      include ActiveModel::Model
-      
+      def initialize(client: nil)
+        key = ENV['GOOGLE_TRANSLATE_API_KEY']
+        raise "Missing GOOGLE_TRANSLATE_API_KEY" if key.blank?
+
+        @client = client || ::Google::Cloud::Translate::V2.new(key: key)
+      end
+
       def translate(text:, target_locale:, source_locale: nil)
-        return demo_translation(text, target_locale) unless credentials_available?
-        return demo_translation(text, target_locale) if target_locale.blank?
-        
-        begin
-          # Clean the text for translation
-          clean_text = text.gsub(/\[DEMO OCR\]\s*/, '').strip
-          
-          translate_params = { to: target_locale }
-          translate_params[:from] = source_locale if source_locale.present?
-          
-          result = translate_client.translate(clean_text, translate_params)
-          result.text
-        rescue => e
-          Rails.logger.error "Translation failed: #{e.message}"
-          demo_translation(text, target_locale)
-        end
+        to   = map_locale(target_locale)
+        from = map_locale(source_locale) if source_locale.present?
+
+        res = @client.translate(text, to: to, from: from)
+        res = res.first if res.is_a?(Array)
+        res&.text.to_s
       end
-      
+
       private
-      
-      def credentials_available?
-        ENV['GOOGLE_TRANSLATE_API_KEY'].present?
-      end
-      
-      def translate_client
-        @translate_client ||= Google::Cloud::Translate::V2.new(
-          key: ENV['GOOGLE_TRANSLATE_API_KEY']
-        )
-      end
-      
-      def demo_translation(text, target_locale)
-        "[DEMO TRANSLATION to #{target_locale}] #{text}"
+
+      # Normalize a few common locales
+      def map_locale(locale)
+        return nil if locale.blank?
+        case locale.to_s.downcase
+        when 'zh', 'zh-cn' then 'zh-CN'
+        when 'zh-tw'       then 'zh-TW'
+        else locale.to_s
+        end
       end
     end
   end

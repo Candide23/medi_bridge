@@ -26,9 +26,13 @@ gem "stimulus-rails"
 gem 'sassc-rails'
 
 # Add these gems
-gem 'rtesseract'
-gem 'pdf-reader'
+# # OCR + image/PDF handling
+gem 'rtesseract', '~> 3.1'
+gem 'mini_magick', '~> 4.12'
+gem 'pdf-reader', '~> 2.11'
+
 gem 'google-cloud-translate'
+
 
 gem 'dotenv-rails', groups: [:development, :test]
 
