@@ -17,28 +17,39 @@
             <i class="bi bi-caret-down-fill text-muted"></i>
           </button>
 
-            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
-              <li>
-                <%= link_to 'Edit Profile', edit_user_registration_path, class: "dropdown-item" %>
-              </li>
-              <li><hr class="dropdown-divider"></li>
-              <!-- Logout -->
-              <li>
-                <%= form_with url: destroy_user_session_path, method: :delete, local: true, class: "m-0" do %>
-                  <button type="submit" class="dropdown-item d-flex align-items-center gap-2 text-danger border-0 bg-transparent w-100">
-                    <i class="bi bi-box-arrow-right"></i>
-                    Logout
-                  </button>
-                <% end %>
-              </li>
-            </ul>
-
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+            <li>
+              <%= link_to 'Edit Profile', edit_user_registration_path, class: "dropdown-item" %>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <!-- Logout -->
+            <li>
+              <%= form_with url: destroy_user_session_path, method: :delete, local: true, class: "m-0" do %>
+                <button type="submit" class="dropdown-item d-flex align-items-center gap-2 text-danger border-0 bg-transparent w-100">
+                  <i class="bi bi-box-arrow-right"></i>
+                  Logout
+                </button>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <!-- Guest Actions -->
+        <div class="d-flex gap-2">
+          <%= link_to new_user_session_path, class: "btn btn-outline-primary d-flex align-items-center gap-1" do %>
+            <i class="bi bi-box-arrow-in-right"></i>
+            Login
+          <% end %>
+          
+          <%= link_to new_user_registration_path, class: "btn btn-primary d-flex align-items-center gap-1" do %>
+            <i class="bi bi-person-plus"></i>
+            Sign Up
+          <% end %>
         </div>
       <% end %>
     </div>
   </div>
 </nav>
-
 
 
 
