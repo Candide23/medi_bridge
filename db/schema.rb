@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_14_192947) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_29_104840) do
   # These are extensions that must be enabled in order to support this database
-  #enable_extension "plpgsql"
+  enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192947) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "text_cache"
     t.index ["user_id"], name: "index_health_records_on_user_id"
   end
 
@@ -57,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192947) do
     t.bigint "health_record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["health_record_id", "language"], name: "index_translations_on_health_record_id_and_language", unique: true
     t.index ["health_record_id"], name: "index_translations_on_health_record_id"
   end
 

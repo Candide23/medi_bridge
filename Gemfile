@@ -25,7 +25,19 @@ gem "stimulus-rails"
 
 gem 'sassc-rails'
 
+# Add these gems
+# # OCR + image/PDF handling
+gem 'rtesseract', '~> 3.1'
+gem 'mini_magick', '~> 4.12'
+gem 'pdf-reader', '~> 2.11'
 
+gem 'google-cloud-translate'
+
+
+gem 'dotenv-rails', groups: [:development, :test]
+
+
+gem 'sidekiq' # if not already present
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
