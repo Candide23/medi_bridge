@@ -61,7 +61,7 @@
 </div>
 
 <!-- How it Works Section -->
-<section class="how-it-works py-5">
+<section id="how-it-works" class="how-it-works py-5">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-5">
@@ -108,7 +108,7 @@
 </section>
 
 <!-- Features Section -->
-<section class="features-section py-5 bg-light">
+<section id="features" class="features-section py-5">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-5">
@@ -193,24 +193,132 @@
   </div>
 </section>
 
+<!-- Testimonials Section -->
+<section class="testimonials-section py-5 bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="display-5 fw-bold mb-3">Trusted by Families Worldwide</h2>
+        <p class="lead text-muted">Real stories from users breaking language barriers in healthcare</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card h-100">
+          <div class="testimonial-content">
+            <div class="stars mb-3">
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+            </div>
+            <p class="text-muted">"MediBridge helped me translate my mother's medical records from Spanish to English for her specialist appointment. The OCR feature saved us so much time!"</p>
+          </div>
+          <div class="testimonial-author d-flex align-items-center">
+            <div class="author-avatar me-3">
+              <i class="bi bi-person-circle fs-3 text-primary"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Maria Rodriguez</h6>
+              <small class="text-muted">Healthcare Advocate</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="testimonial-card h-100">
+          <div class="testimonial-content">
+            <div class="stars mb-3">
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+            </div>
+            <p class="text-muted">"As an immigrant, managing my family's health records was challenging. MediBridge made everything accessible and organized in multiple languages."</p>
+          </div>
+          <div class="testimonial-author d-flex align-items-center">
+            <div class="author-avatar me-3">
+              <i class="bi bi-person-circle fs-3 text-success"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Ahmed Hassan</h6>
+              <small class="text-muted">Father of 3</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="testimonial-card h-100">
+          <div class="testimonial-content">
+            <div class="stars mb-3">
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+            </div>
+            <p class="text-muted">"The security and privacy features give me confidence. I can share translated medical reports with my healthcare team without worrying about privacy."</p>
+          </div>
+          <div class="testimonial-author d-flex align-items-center">
+            <div class="author-avatar me-3">
+              <i class="bi bi-person-circle fs-3 text-info"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Dr. Sarah Chen</h6>
+              <small class="text-muted">Medical Professional</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Call to Action -->
 <section class="cta-section py-5">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h2 class="display-5 fw-bold mb-3">Ready to Bridge Language Barriers in Healthcare?</h2>
-        <p class="lead text-muted mb-4">Join thousands of families managing their health records in multiple languages.</p>
+        <h2 class="display-5 fw-bold mb-3 text-white">Ready to Bridge Language Barriers in Healthcare?</h2>
+        <p class="lead mb-4 text-white-50">Join thousands of families managing their health records in multiple languages.</p>
         
         <% unless user_signed_in? %>
-          <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg px-5 py-3 me-3" do %>
+          <%= link_to new_user_registration_path, class: "btn btn-light btn-lg px-5 py-3 me-3" do %>
             <i class="bi bi-person-plus me-2"></i>Create Free Account
           <% end %>
-          <p class="small text-muted mt-3">No credit card required • Free forever • Secure & private</p>
+          <p class="small text-white-50 mt-3">No credit card required • Free forever • Secure & private</p>
         <% end %>
+        
+        <div class="trust-indicators mt-4">
+          <div class="row justify-content-center">
+            <div class="col-auto">
+              <span class="badge bg-light text-dark me-3">
+                <i class="bi bi-shield-check me-1"></i>HIPAA Compliant
+              </span>
+            </div>
+            <div class="col-auto">
+              <span class="badge bg-light text-dark me-3">
+                <i class="bi bi-translate me-1"></i>8+ Languages
+              </span>
+            </div>
+            <div class="col-auto">
+              <span class="badge bg-light text-dark">
+                <i class="bi bi-people me-1"></i>10,000+ Users
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+
 
 
 
