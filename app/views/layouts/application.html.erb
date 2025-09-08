@@ -19,19 +19,19 @@
     <%= render "shared/navbar" %>
 
     <%# Flash messages (skip "Signed in successfully" unless on dashboard) %>
-    <% if flash.any? %>
-      <div class="container mt-3">
-        <% flash.each do |type, message| %>
-          <% if message != "Signed in successfully." || current_page?(health_records_path) %>
-            <% bootstrap_class = type == "notice" ? "info" : "danger" %>
-            <div class="alert alert-<%= bootstrap_class %> alert-dismissible fade show shadow-sm" role="alert">
-              <%= message %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+      <% if flash.any? %>
+        <div class="<%= current_page?(root_path) ? '' : 'container mt-3' %>">
+          <% flash.each do |type, message| %>
+            <% if message != "Signed in successfully." || current_page?(health_records_path) %>
+              <% bootstrap_class = type == "notice" ? "info" : "danger" %>
+              <div class="alert alert-<%= bootstrap_class %> alert-dismissible fade show shadow-sm text-center mx-auto" style="max-width: 700px;" role="alert">
+                <%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
 
     <main class="flex-grow-1">
       <% if current_page?(root_path) %>
