@@ -89,7 +89,7 @@ Then visit: [http://localhost:3000](http://localhost:3000)
 ---
 
 ## ✨ Features
-
+```
 - 📁 Upload health documents (PDF, JPG, PNG, TXT)
 - 🌍 Translate documents into 8+ supported languages
 - 🔍 OCR text extraction from scanned images
@@ -98,7 +98,7 @@ Then visit: [http://localhost:3000](http://localhost:3000)
 - 🔄 Toggle between original and translated content
 - 🏷️ Organize records by type (prescription, vaccination, doctor note)
 - 📥 Download original or translated records
-
+```
 ---
 
 ## 🧠 Troubleshooting
