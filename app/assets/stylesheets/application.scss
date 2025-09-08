@@ -1,130 +1,289 @@
-// Replace the purple background styles in your application.scss
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
 
-// ================================
-// UPDATED GLOBAL BACKGROUND THEME
-// ================================
-
+// Design Tokens
 :root {
-  --primary-gradient: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  --medical-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
-  --clean-gradient: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  --hero-gradient: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(40, 167, 69, 0.8));
-  --glass-background: rgba(255, 255, 255, 0.95);
-  --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
-  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
-  --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.2);
-  --border-radius: 12px;
-  --transition: all 0.3s ease;
-  --medical-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f1f3f4' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  --bg-page: #f4f9fb;
+  --bg-surface: #ffffff;
+  --bg-light: #eef2f5;
+  --bg-muted: #dfe4ea;
+
+  --accent-dark: #2f3542;
+  --accent-blue: #007bff;
+  --accent-blue-hover: #0056b3;
+  --accent-green: #28a745;
+  --accent-info: #17a2b8;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+  --radius: 0.5rem;
+
+  --pattern-medical: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23007bff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
+// Base Layout
 body {
-  background: var(--clean-gradient);
-  background-attachment: fixed;
-  min-height: 100vh;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  position: relative;
-  
-  &::before {
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-page);
+  color: var(--accent-dark);
+  line-height: 1.6;
+
+  &.pattern-bg::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--medical-pattern);
-    opacity: 0.3;
+    background: var(--pattern-medical);
+    opacity: 0.4;
     z-index: -1;
   }
 }
 
-// ================================
-// PAGE-SPECIFIC BACKGROUNDS
-// ================================
+// Buttons
+.btn-primary {
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
 
-// Homepage
+  &:hover {
+    background-color: var(--accent-blue-hover);
+    border-color: var(--accent-blue-hover);
+  }
+}
+
+// Cards
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    background-color: var(--bg-light);
+    border-bottom: 1px solid var(--bg-muted);
+  }
+}
+
+// Section Backgrounds
+.container.with-bg {
+  background: var(--bg-surface);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+
+// Hero Section with real background image
+// Hero Section Styles
 .hero-background {
-  background-image: var(--hero-gradient), 
-                    url(asset-path("medical_team_background.jpg"));
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.3),  // darker overlay
+      rgba(0, 0, 0, 0.3)
+    ),
+    url(asset-path("family_background.jpg"));
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  color: black; // ensures all text is white by default
+}
+
+
+
+
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.1); // <- CHANGE THIS
+  // Better: Remove it completely or set to transparent
+  background: transparent;
+}
+
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+// Hero Visual Elements
+.hero-visual {
   position: relative;
   
-  @media (max-width: 768px) {
+  .hero-icon {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    
+    .feature-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      
+      i {
+        font-size: 2rem;
+      }
+      
+      span {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+// Step Cards
+.step-card {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: var(--accent-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  .step-icon {
+    margin: 1rem 0;
+  }
+}
+
+// Features Section
+.features-section {
+  background: #f8f9fa;
+  
+  .feature-item {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateX(5px);
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      min-width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border-radius: 10px;
+    }
+  }
+}
+
+// Testimonials
+.testimonials-section {
+  .testimonial-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    .testimonial-content {
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-author {
+      padding-top: 1rem;
+      border-top: 1px solid #e9ecef;
+    }
+  }
+}
+
+// CTA Section
+.cta-section {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+  
+  .trust-indicators {
+    .badge {
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+    }
+  }
+}
+
+// How it Works Section
+.how-it-works {
+  background: white;
+}
+
+// Auth and Dashboard Pages
+.auth-page, .dashboard-page, .records-page {
+  background: var(--bg-page);
+  min-height: 100vh;
+  padding: 2rem;
+
+  .auth-container, .content-wrapper {
+    background: var(--bg-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+  }
+}
+
+// Responsive Tweaks
+@media (max-width: 768px) {
+  .card {
+    border-radius: calc(var(--radius) * 0.75);
+    margin-bottom: 1rem;
+  }
+
+  .hero-section {
+    min-height: 400px;
     background-attachment: scroll;
-    height: 90vh;
   }
 }
-
-// Authentication pages
-.auth-background {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e3f2fd 100%);
-  background-attachment: fixed;
-  position: relative;
-  min-height: 100vh;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--medical-pattern);
-    opacity: 0.1;
-  }
-}
-
-// Records/Dashboard pages
-.records-page, .dashboard-page {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  min-height: 100vh;
-  padding: 2rem 0;
-  
-  &::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--medical-pattern);
-    opacity: 0.05;
-    z-index: -1;
-  }
-}
-
-// How it works and features sections
-.how-it-works, .features-section {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--medical-pattern);
-    opacity: 0.03;
-  }
-}
-
-// Remove old purple gradient animation
-.animated-gradient {
-  background: var(--clean-gradient);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-
-
 
 
 

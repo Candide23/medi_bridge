@@ -1,14 +1,43 @@
-<div class="container mt-4" style="max-width: 800px;">
-  <div class="text-center my-5">
-    <h1 class="fw-bold display-5 mb-2">Upload New Health Record</h1>
-    <p class="text-muted fs-5">Add a new medical document to your collection</p>
-  </div>
+<div class="min-vh-100 py-5 px-3 d-flex flex-column align-items-center bg-light">
+  <div class="container" style="max-width: 800px;">
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark">Upload New Health Record</h2>
+      <p class="text-muted fs-5">Add a new medical document to your collection</p>
+    </div>
 
-  <%= render "form", health_record: @health_record %>
+    <!-- Form Card -->
+    <div class="card shadow-sm p-4 border-0">
+      <%= form_with model: @health_record, local: true do |f| %>
+        <div class="mb-3">
+          <%= f.label :record_type, "Record Type", class: "form-label fw-semibold" %>
+          <%= f.select :record_type, HealthRecord::RECORD_TYPES, {}, class: "form-select", required: true %>
+        </div>
 
-  <div class="mt-4">
-    <%= link_to health_records_path, class: "btn btn-secondary" do %>
-      <i class="bi bi-arrow-left me-1"></i> Back to health records
-    <% end %>
+        <div class="mb-3">
+          <%= f.label :language, "Original Language", class: "form-label fw-semibold" %>
+          <%= f.select :language, HealthRecord::SUPPORTED_LANGUAGES.map { |name, code| [name, code] }, {}, class: "form-select", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :document, "Upload File", class: "form-label fw-semibold" %>
+          <%= f.file_field :document, class: "form-control", accept: ".pdf,image/*", required: true %>
+          <div class="form-text">Accepted: PDF, JPG, PNG</div>
+        </div>
+
+      <div class="text-end">
+        <%= f.submit "Upload Record", class: "btn btn-success px-4" %>
+      </div>
+
+      <% end %>
+    </div>
+
+    <!-- Back Link -->
+    <div class="mt-4">
+      <%= link_to health_records_path, class: "btn btn-outline-secondary" do %>
+        <i class="bi bi-arrow-left me-1"></i> Back to Health Records
+      <% end %>
+    </div>
   </div>
 </div>
+

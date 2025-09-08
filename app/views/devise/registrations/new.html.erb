@@ -1,85 +1,83 @@
-<div class="auth-background d-flex align-items-center justify-content-center min-vh-100">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-5">
-        <div class="auth-card glass-card">
-          <!-- Header -->
-          <div class="auth-header text-center mb-4">
-            <div class="auth-icon mb-3">
-              <i class="bi bi-person-plus-fill text-success"></i>
+<!-- app/views/devise/registrations/new.html.erb -->
+
+<div class="auth-background pattern-bg">
+  <div class="container py-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-7 col-lg-6">
+      <div class="card shadow-lg border-0 p-4 rounded auth-container">
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+          <i class="bi bi-person-plus-fill fs-1 text-success mb-2"></i>
+          <h2 class="fw-bold text-primary">Create your account</h2>
+          <p class="text-muted">Join MediBridge and take control of your health records</p>
+        </div>
+
+        <!-- Form -->
+        <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
+
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <%= f.text_field :first_name, autofocus: true, class: "form-control", id: "floatingFirstName", placeholder: "First name" %>
+                <label for="floatingFirstName">
+                  <i class="bi bi-person me-2"></i>First name
+                </label>
+              </div>
             </div>
-            <h2 class="auth-title">Create your account</h2>
-            <p class="auth-subtitle text-muted">Join MediBridge and take control of your health records</p>
+
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <%= f.text_field :last_name, class: "form-control", id: "floatingLastName", placeholder: "Last name" %>
+                <label for="floatingLastName">
+                  <i class="bi bi-person me-2"></i>Last name
+                </label>
+              </div>
+            </div>
           </div>
 
-          <!-- Form -->
-          <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true, class: "auth-form") do |f| %>
-            <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="form-floating mb-3">
+            <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "floatingEmail", placeholder: "name@example.com" %>
+            <label for="floatingEmail">
+              <i class="bi bi-envelope me-2"></i>Email address
+            </label>
+          </div>
 
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-floating mb-3">
-                  <%= f.text_field :first_name, autofocus: true, class: "form-control auth-input", id: "floatingFirstName", placeholder: "First name" %>
-                  <label for="floatingFirstName">
-                    <i class="bi bi-person me-2"></i>First name
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-floating mb-3">
-                  <%= f.text_field :last_name, class: "form-control auth-input", id: "floatingLastName", placeholder: "Last name" %>
-                  <label for="floatingLastName">
-                    <i class="bi bi-person me-2"></i>Last name
-                  </label>
-                </div>
-              </div>
-            </div>
+          <div class="form-floating mb-3">
+            <%= f.select :preferred_language, options_for_select(HealthRecord::SUPPORTED_LANGUAGES, 'en'), {}, { class: "form-select", id: "floatingLanguage" } %>
+            <label for="floatingLanguage">
+              <i class="bi bi-translate me-2"></i>Preferred language
+            </label>
+          </div>
 
-            <div class="form-floating mb-3">
-              <%= f.email_field :email, autocomplete: "email", class: "form-control auth-input", id: "floatingEmail", placeholder: "name@example.com" %>
-              <label for="floatingEmail">
-                <i class="bi bi-envelope me-2"></i>Email address
-              </label>
-            </div>
+          <div class="form-floating mb-3">
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "floatingPassword", placeholder: "Password" %>
+            <label for="floatingPassword">
+              <i class="bi bi-lock me-2"></i>Password
+              <span class="text-muted small">(<%= @minimum_password_length %> characters minimum)</span>
+            </label>
+          </div>
 
-            <div class="form-floating mb-3">
-              <%= f.select :preferred_language, 
-                  options_for_select(HealthRecord::SUPPORTED_LANGUAGES, 'en'), 
-                  {}, 
-                  {class: "form-select auth-input", id: "floatingLanguage"} %>
-              <label for="floatingLanguage">
-                <i class="bi bi-translate me-2"></i>Preferred language
-              </label>
-            </div>
+          <div class="form-floating mb-4">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", id: "floatingPasswordConfirm", placeholder: "Confirm password" %>
+            <label for="floatingPasswordConfirm">
+              <i class="bi bi-lock-fill me-2"></i>Confirm password
+            </label>
+          </div>
 
-            <div class="form-floating mb-3">
-              <%= f.password_field :password, autocomplete: "new-password", class: "form-control auth-input", id: "floatingPassword", placeholder: "Password" %>
-              <label for="floatingPassword">
-                <i class="bi bi-lock me-2"></i>Password
-                <span class="text-muted small">(<%= @minimum_password_length %> characters minimum)</span>
-              </label>
-            </div>
+          <div class="d-grid mb-3">
+            <%= f.submit "Create your account", class: "btn btn-success btn-lg" %>
+          </div>
 
-            <div class="form-floating mb-4">
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control auth-input", id: "floatingPasswordConfirm", placeholder: "Confirm password" %>
-              <label for="floatingPasswordConfirm">
-                <i class="bi bi-lock-fill me-2"></i>Confirm password
-              </label>
-            </div>
+          <!-- Link -->
+          <div class="text-center">
+            <span class="text-muted">Already have an account?</span><br>
+            <%= link_to "Sign in here", new_session_path(resource_name), class: "btn btn-outline-primary mt-2" %>
+          </div>
 
-            <div class="d-grid mb-3">
-              <%= f.submit "Create your account", class: "btn btn-success btn-lg auth-submit" %>
-            </div>
+        <% end %>
 
-            <!-- Links -->
-            <div class="auth-links text-center">
-              <div class="auth-divider">
-                <span>Already have an account?</span>
-              </div>
-              <%= link_to "Sign in here", new_session_path(resource_name), class: "auth-link" %>
-            </div>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>

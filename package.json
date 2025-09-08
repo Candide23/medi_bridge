@@ -1,0 +1,13 @@
+{
+  "name": "medi_bridge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Candide23/medi_bridge.git",
+  "author": "Candide Mboungou-Kimpolo <mboungoukimpolo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1"
+  }
+}
