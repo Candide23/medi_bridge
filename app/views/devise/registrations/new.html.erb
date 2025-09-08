@@ -1,49 +1,86 @@
-<div class="min-vh-100 d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #6e8efb, #a777e3); padding: 2rem;">
-  <div class="bg-white rounded-4 shadow p-5" style="max-width: 460px; width: 100%;">
-    <h2 class="text-center fw-bold mb-1">Create your account</h2>
-    <p class="text-center text-muted mb-4">Join MediBridge and take control of your health records</p>
+<!-- app/views/devise/registrations/new.html.erb -->
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <div class="row">
-        <div class="col mb-3">
-          <%= f.label :first_name, class: "form-label fw-semibold" %>
-          <%= f.text_field :first_name, placeholder: "First name", class: "form-control rounded-3 px-3 py-2" %>
+<div class="auth-background pattern-bg">
+  <div class="container py-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-7 col-lg-6">
+      <div class="card shadow-lg border-0 p-4 rounded auth-container">
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+          <i class="bi bi-person-plus-fill fs-1 text-success mb-2"></i>
+          <h2 class="fw-bold text-primary">Create your account</h2>
+          <p class="text-muted">Join MediBridge and take control of your health records</p>
         </div>
-        <div class="col mb-3">
-          <%= f.label :last_name, class: "form-label fw-semibold" %>
-          <%= f.text_field :last_name, placeholder: "Last name", class: "form-control rounded-3 px-3 py-2" %>
-        </div>
+
+        <!-- Form -->
+        <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
+
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <%= f.text_field :first_name, autofocus: true, class: "form-control", id: "floatingFirstName", placeholder: "First name" %>
+                <label for="floatingFirstName">
+                  <i class="bi bi-person me-2"></i>First name
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <%= f.text_field :last_name, class: "form-control", id: "floatingLastName", placeholder: "Last name" %>
+                <label for="floatingLastName">
+                  <i class="bi bi-person me-2"></i>Last name
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "floatingEmail", placeholder: "name@example.com" %>
+            <label for="floatingEmail">
+              <i class="bi bi-envelope me-2"></i>Email address
+            </label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <%= f.select :preferred_language, options_for_select(HealthRecord::SUPPORTED_LANGUAGES, 'en'), {}, { class: "form-select", id: "floatingLanguage" } %>
+            <label for="floatingLanguage">
+              <i class="bi bi-translate me-2"></i>Preferred language
+            </label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "floatingPassword", placeholder: "Password" %>
+            <label for="floatingPassword">
+              <i class="bi bi-lock me-2"></i>Password
+              <span class="text-muted small">(<%= @minimum_password_length %> characters minimum)</span>
+            </label>
+          </div>
+
+          <div class="form-floating mb-4">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", id: "floatingPasswordConfirm", placeholder: "Confirm password" %>
+            <label for="floatingPasswordConfirm">
+              <i class="bi bi-lock-fill me-2"></i>Confirm password
+            </label>
+          </div>
+
+          <div class="d-grid mb-3">
+            <%= f.submit "Create your account", class: "btn btn-success btn-lg" %>
+          </div>
+
+          <!-- Link -->
+          <div class="text-center">
+            <span class="text-muted">Already have an account?</span><br>
+            <%= link_to "Sign in here", new_session_path(resource_name), class: "btn btn-outline-primary mt-2" %>
+          </div>
+
+        <% end %>
+
       </div>
-
-      <div class="mb-3">
-        <%= f.label :email, "Email address", class: "form-label fw-semibold" %>
-        <%= f.email_field :email, autocomplete: "email", placeholder: "Enter your email", class: "form-control rounded-3 px-3 py-2" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :preferred_language, "Preferred language", class: "form-label fw-semibold" %>
-        <%= f.select :preferred_language, options_for_select(["English", "Spanish", "French", "Arabic"]), {}, class: "form-select rounded-3 px-3 py-2" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :password, class: "form-label fw-semibold" %>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Create a password", class: "form-control rounded-3 px-3 py-2" %>
-      </div>
-
-      <div class="mb-4">
-        <%= f.label :password_confirmation, "Confirm password", class: "form-label fw-semibold" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm your password", class: "form-control rounded-3 px-3 py-2" %>
-      </div>
-
-      <%= f.submit "Create your account", class: "btn btn-success w-100 fw-semibold py-2" %>
-    <% end %>
-
-    <div class="text-center mt-4">
-      <span class="text-muted">Already have an account?</span>
-      <%= link_to "Sign in here", new_session_path(resource_name), class: "fw-semibold text-decoration-none text-primary" %>
     </div>
   </div>
 </div>
-
 
 

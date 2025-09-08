@@ -1,11 +1,17 @@
-<div class="text-center my-5">
-  <h1 class="fw-bold display-5 mb-2">Edit Health Record</h1>
-  <p class="text-muted fs-5">Update your medical document details below</p>
-</div>
+<div class="container mt-4" style="max-width: 800px;">
+  <div class="text-center my-5">
+    <h1 class="fw-bold display-5 mb-2">Edit Health Record</h1>
+    <p class="text-muted fs-5">Update your medical document details below</p>
+  </div>
 
-<%= render "form", health_record: @health_record %>
-<br>
-<div>
-  <%= link_to "Show this health record", @health_record %> |
-  <%= link_to "Back to health records", health_records_path %>
+  <%= render "form", health_record: @health_record %>
+
+  <div class="mt-4 d-flex gap-2">
+    <%= link_to @health_record, class: "btn btn-info" do %>
+      <i class="bi bi-eye me-1"></i> View record
+    <% end %>
+    <%= link_to health_records_path, class: "btn btn-secondary" do %>
+      <i class="bi bi-arrow-left me-1"></i> Back to health records
+    <% end %>
+  </div>
 </div>
