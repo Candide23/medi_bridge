@@ -1,97 +1,108 @@
-<!-- app/views/pages/home.html.erb -->
 <div class="hero-background d-flex align-items-center justify-content-center text-white">
-  <div class="container text-center">
-    <h1 class="display-3 fw-bold mb-4">MediBridge</h1>
-    <p class="lead mb-4 fs-4">Never lose critical health documents.<br>Always understand your care instructions.</p>
-    
-    <div class="row justify-content-center mb-4">
-      <div class="col-auto">
-        <i class="bi bi-cloud-upload fs-1"></i>
-        <p class="small">Upload</p>
-      </div>
-      <div class="col-auto">
-        <i class="bi bi-arrow-right fs-2 mt-3"></i>
-      </div>
-      <div class="col-auto">
-        <i class="bi bi-translate fs-1"></i>
-        <p class="small">Translate</p>
-      </div>
-      <div class="col-auto">
-        <i class="bi bi-arrow-right fs-2 mt-3"></i>
-      </div>
-      <div class="col-auto">
-        <i class="bi bi-toggle-on fs-1"></i>
-        <p class="small">Toggle</p>
+  <div class="hero-overlay w-100 h-100 d-flex align-items-center justify-content-center">
+    <div class="container px-4">
+      <div class="row align-items-center">
+        <div class="col-lg-6 text-center text-lg-start">
+          <h1 class="display-3 fw-bold mb-4 text-shadow">Welcome to MediBridge</h1>
+          <p class="lead mb-4 fs-5">Securely store, organize, and translate your health records — in multiple languages.</p>
+
+          <div class="hero-features mb-4">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-shield-check text-success me-2 fs-5"></i>
+              <span>Private & Secure Storage</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-file-earmark-text text-info me-2 fs-5"></i>
+              <span>Text Extraction with OCR</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-translate text-warning me-2 fs-5"></i>
+              <span>Google Translate Integration</span>
+            </div>
+          </div>
+
+          <% if user_signed_in? %>
+            <%= link_to health_records_path, class: "btn btn-primary btn-lg px-5 py-3 me-3" do %>
+              <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard
+            <% end %>
+          <% else %>
+            <%= link_to new_user_registration_path, class: "btn btn-light btn-lg px-5 py-3 me-3" do %>
+              <i class="bi bi-person-plus me-2"></i> Get Started Free
+            <% end %>
+            <%= link_to new_user_session_path, class: "btn btn-outline-light btn-lg px-4 py-3" do %>
+              <i class="bi bi-box-arrow-in-right me-2"></i> Sign In
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="col-lg-6 text-center d-none d-lg-block">
+          <div class="hero-visual">
+            <i class="bi bi-hospital display-1 text-white mb-3 hero-icon"></i>
+            <div class="feature-cards">
+              <div class="feature-card">
+                <i class="bi bi-file-medical"></i>
+                <span>Upload</span>
+              </div>
+              <div class="feature-card">
+                <i class="bi bi-eyeglasses"></i>
+                <span>Extract</span>
+              </div>
+              <div class="feature-card">
+                <i class="bi bi-translate"></i>
+                <span>Translate</span>
+              </div>
+              <div class="feature-card">
+                <i class="bi bi-download"></i>
+                <span>Download</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <% if user_signed_in? %>
-      <%= link_to "Go to Dashboard", health_records_path, class: "btn btn-light btn-lg px-5 py-3" %>
-    <% else %>
-      <%= link_to "Get Started Free", new_user_registration_path, class: "btn btn-light btn-lg px-5 py-3 me-3" %>
-      <%= link_to "Sign In", new_user_session_path, class: "btn btn-outline-light btn-lg px-4 py-3" %>
-    <% end %>
   </div>
 </div>
 
-<section class="py-5">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold">Your Health Records, Any Language</h2>
-      <p class="text-muted">Secure storage and translation for prescriptions, vaccination cards, and doctor's notes</p>
+
+<section id="how-it-works" class="how-it-works py-5">
+  <div class="container with-bg">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="display-5 fw-bold mb-3">How MediBridge Works</h2>
+        <p class="lead text-muted">Upload, extract, and translate your health documents in just a few steps.</p>
+      </div>
     </div>
 
     <div class="row g-4">
       <div class="col-md-4">
-        <div class="card h-100 text-center p-4">
-          <i class="bi bi-file-earmark-medical display-4 text-primary mb-3"></i>
-          <h5>Upload Documents</h5>
-          <p class="text-muted">PDF, JPG, or PNG files. Classify as prescription, vaccination card, or doctor's note.</p>
+        <div class="step-card text-center h-100">
+          <div class="step-number">1</div>
+          <div class="step-icon"><i class="bi bi-cloud-upload display-4 text-primary"></i></div>
+          <h4 class="mb-3">Upload Your Documents</h4>
+          <p class="text-muted">Securely upload your medical files (PDF, PNG, JPG, or TXT) to your account.</p>
         </div>
       </div>
-      
+
       <div class="col-md-4">
-        <div class="card h-100 text-center p-4">
-          <i class="bi bi-translate display-4 text-info mb-3"></i>
-          <h5>Translate to Your Language</h5>
-          <p class="text-muted">Support for English, Spanish, French, Chinese, Arabic, and more languages.</p>
+        <div class="step-card text-center h-100">
+          <div class="step-number">2</div>
+          <div class="step-icon"><i class="bi bi-eyeglasses display-4 text-info"></i></div>
+          <h4 class="mb-3">Text Extraction (OCR)</h4>
+          <p class="text-muted">We use Optical Character Recognition to extract readable text from your files.</p>
         </div>
       </div>
-      
+
       <div class="col-md-4">
-        <div class="card h-100 text-center p-4">
-          <i class="bi bi-toggle2-on display-4 text-success mb-3"></i>
-          <h5>Toggle Between Versions</h5>
-          <p class="text-muted">Switch between original and translated content instantly. Never lose the original.</p>
+        <div class="step-card text-center h-100">
+          <div class="step-number">3</div>
+          <div class="step-icon"><i class="bi bi-translate display-4 text-warning"></i></div>
+          <h4 class="mb-3">Translate & Manage</h4>
+          <p class="text-muted">Translate the extracted text using Google Translate and download both versions.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<section class="py-5 bg-light">
-  <div class="container text-center">
-    <h3 class="fw-bold mb-4">Who Uses MediBridge?</h3>
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <p class="lead text-muted">
-          <strong>Immigrant families</strong> managing school health forms •
-          <strong>Caregivers</strong> helping elderly parents understand prescriptions •
-          <strong>Travelers</strong> needing medical care abroad
-        </p>
-      </div>
-    </div>
-    
-    <% unless user_signed_in? %>
-      <div class="mt-5">
-        <%= link_to "Start Managing Your Health Records", new_user_registration_path, 
-            class: "btn btn-primary btn-lg px-5 py-3" %>
-        <p class="small text-muted mt-3">Free • Secure • Private</p>
-      </div>
-    <% end %>
-  </div>
-</section>
-
 
 
 
