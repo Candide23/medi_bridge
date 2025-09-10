@@ -1,4 +1,3 @@
-<!-- app/views/health_records/index.html.erb -->
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold">Your Health Records</h2>
@@ -59,12 +58,40 @@
                   <i class="bi bi-pencil"></i>
                 <% end %>
                 
-                <%= button_to health_record_path(record), 
-                              method: :delete, 
-                              data: { turbo_confirm: "Delete this record and all translations?" }, 
-                              class: "btn btn-outline-danger btn-sm",
-                              form: { style: "display: inline;" } do %>
+                <!-- Trigger Delete Modal -->
+                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-<%= record.id %>">
                   <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Modal for this record -->
+        <div class="modal fade" id="deleteModal-<%= record.id %>" tabindex="-1" aria-labelledby="deleteModalLabel-<%= record.id %>" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-3">
+              <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title d-flex align-items-center" id="deleteModalLabel-<%= record.id %>">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  Confirm Deletion
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body text-center">
+                <i class="bi bi-trash display-3 text-danger mb-3"></i>
+                <p class="fs-5">
+                  Delete <strong><%= record.document.attached? ? record.document.filename : "this record" %></strong>
+                  and all of its translations?
+                </p>
+                <p class="text-muted mb-0">
+                  This action <span class="fw-bold text-danger">cannot</span> be undone.
+                </p>
+              </div>
+              <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                <%= form_with url: health_record_path(record), method: :delete, data: { turbo: true } do |f| %>
+                  <%= f.submit "Delete Permanently", class: "btn btn-danger px-4" %>
                 <% end %>
               </div>
             </div>
@@ -83,6 +110,7 @@
     </div>
   <% end %>
 </div>
+
 
 
 
