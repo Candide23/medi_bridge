@@ -119,6 +119,9 @@ Check for mt-3 on flash containers
 Use conditional margin if you're on the root path
 
 📸 Screenshots
+![alt text](<Screenshot 2025-09-10 at 3.58.07 PM.png>)
+![alt text](<Screenshot 2025-09-10 at 3.59.54 PM.png>)
+![alt text](<Screenshot 2025-09-10 at 4.01.50 PM.png>)
 🏠 Home Page
 
 📂 Upload Form
