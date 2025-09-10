@@ -122,7 +122,6 @@ Use conditional margin if you're on the root path
 ![alt text](<Screenshot 2025-09-10 at 3.58.07 PM.png>)
 ![alt text](<Screenshot 2025-09-10 at 3.59.54 PM.png>)
 ![alt text](<Screenshot 2025-09-10 at 4.01.50 PM.png>)
-🏠 Home Page
 
 📂 Upload Form
 
@@ -143,9 +142,10 @@ Translation
 📬 Contact
 
 Candide Mboungou-Kimpolo
-📧 candide@uic.edu
+📧 mboungoukimpolo@gmail.com
 
 🌐 LinkedIn
+https://www.linkedin.com/in/candide-mboungou-kimpolo/
 
 📄 License
 
