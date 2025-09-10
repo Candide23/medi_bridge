@@ -131,14 +131,11 @@ Then visit: [http://localhost:3000](http://localhost:3000)
 
 > _(Add screenshots in the `public/screenshots/` directory and link them below)_
 
-- 🏠 Home Page  
-  `public/screenshots/home.png`
-
-- 📂 Upload Form  
-  `public/screenshots/upload.png`
-
-- 📝 Record Detail + Translation  
-  `public/screenshots/record-detail.png`
+📸 Screenshots
+![alt text](<Screenshot 2025-09-10 at 3.58.07 PM.png>)
+![alt text](<Screenshot 2025-09-10 at 3.59.54 PM.png>)
+![alt text](<Screenshot 2025-09-10 at 4.01.50 PM.png>)
+🏠 Home Page
 
 ---
 
