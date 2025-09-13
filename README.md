@@ -155,9 +155,9 @@ Translation
 ## 📬 Contact
 
 Candide Mboungou-Kimpolo
-📧 candide@uic.edu
+📧 mboungoukimpolo@gmail.com
 
-🌐 LinkedIn
+🌐 LinkedIn: https://www.linkedin.com/in/candide-mboungou-kimpolo/
 
 ## 📄 License
 
@@ -175,6 +175,4 @@ all copies or substantial portions of the Software.
 
 **THE SOFTWARE IS PROVIDED "AS IS"**, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
-
-Want me to generate this as a downloadable file (`README.md`) too?
 
