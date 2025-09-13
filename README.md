@@ -128,14 +128,10 @@ Then visit: [http://localhost:3000](http://localhost:3000)
 ---
 
 ## 📸 Screenshots
-
-> _(Add screenshots in the `public/screenshots/` directory and link them below)_
-
 📸 Screenshots
 ![alt text](<Screenshot 2025-09-10 at 3.58.07 PM.png>)
 ![alt text](<Screenshot 2025-09-10 at 3.59.54 PM.png>)
 ![alt text](<Screenshot 2025-09-10 at 4.01.50 PM.png>)
-🏠 Home Page
 
 ---
 
@@ -158,11 +154,10 @@ Translation
 
 ## 📬 Contact
 
-**Candide Mboungou-Kimpolo**  
-📧 candide@uic.edu  
-🌐 [LinkedIn](https://www.linkedin.com/in/candide-mbk/)
+Candide Mboungou-Kimpolo
+📧 candide@uic.edu
 
----
+🌐 LinkedIn
 
 ## 📄 License
 
