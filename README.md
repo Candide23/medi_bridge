@@ -1,6 +1,7 @@
+
 # 🏥 MediBridge | Multilingual Health Record Management System
 
-MediBridge is a secure, multilingual health data management platform that helps users upload, organize, and translate personal health records—especially across language barriers.
+**MediBridge** is a secure, multilingual health data management platform that helps users upload, organize, and translate personal health records—especially across language barriers.
 
 ---
 
@@ -13,6 +14,7 @@ MediBridge is a secure, multilingual health data management platform that helps 
 - [Features](#features)
 - [Troubleshooting](#troubleshooting)
 - [Screenshots](#screenshots)
+- [System Design (ERD)](#system-design-erd)
 - [Contact](#contact)
 - [License](#license)
 
@@ -43,91 +45,99 @@ Ensure the following are installed on your system:
    ```bash
    git clone https://github.com/your-username/medi-bridge.git
    cd medi-bridge
-Install dependencies:
+   ```
 
-bundle install
-yarn install
+2. **Install dependencies:**
 
+   ```bash
+   bundle install
+   yarn install
+   ```
 
-Set up environment variables:
+3. **Set up environment variables:**
 
-Create a .env file and define any required keys (e.g., GOOGLE_TRANSLATE_API_KEY).
+   Create a `.env` file and define any required keys:
 
-Create and migrate the database:
+   ```
+   GOOGLE_TRANSLATE_API_KEY=your_key_here
+   ```
 
-rails db:create db:migrate
+4. **Create and migrate the database:**
 
+   ```bash
+   rails db:create db:migrate
+   ```
 
-(Optional) Seed sample data:
+5. *(Optional)* **Seed sample data:**
 
-rails db:seed
+   ```bash
+   rails db:seed
+   ```
 
-▶️ Usage
+---
 
-Start your Rails server:
+## ▶️ Usage
 
+Start the Rails server:
+
+```bash
 rails server
+```
 
+Then visit: [http://localhost:3000](http://localhost:3000)
 
-Then visit: http://localhost:3000
+---
 
-✨ Features
+## ✨ Features
+```
+- 📁 Upload health documents (PDF, JPG, PNG, TXT)
+- 🌍 Translate documents into 8+ supported languages
+- 🔍 OCR text extraction from scanned images
+- 👨‍👩‍👧‍👦 Family member record management
+- 🔐 Secure, encrypted storage
+- 🔄 Toggle between original and translated content
+- 🏷️ Organize records by type (prescription, vaccination, doctor note)
+- 📥 Download original or translated records
+```
+---
 
-📁 Upload health documents (PDF, JPG, PNG, TXT)
+## 🧠 Troubleshooting
 
-🌍 Translate documents into 8+ supported languages
+### ❗ Problem: `bundle install` fails
 
-🔍 OCR text extraction from images
+- Check Ruby version: `ruby -v`
+- Update Bundler: `gem install bundler`
+- Try: `bundle update`
 
-👨‍👩‍👧‍👦 Family member record management
+### ❗ Problem: PostgreSQL connection errors
 
-🔐 Secure, encrypted storage
+- Ensure PostgreSQL is installed and running
+- Check your `config/database.yml`
+- Try: `rails db:reset`
 
-🔄 Toggle between original and translated content
+### ❗ Problem: Assets not loading
 
-🏷️ Organize records by type (prescription, vaccination, doctor note)
+- Run: `rails assets:precompile`
+- Ensure Bootstrap and asset pipeline are correctly configured
 
-📥 Download original or translated records
+### ❗ Problem: Flash messages are misaligned
 
-🧠 Troubleshooting
-❗ Problem: bundle install fails
+- Check for `mt-3` or `mt-0` spacing on flash containers
+- Adjust margin spacing conditionally based on the page (e.g. homepage)
 
-Ensure correct Ruby version (ruby -v)
+---
 
-Update bundler: gem install bundler
-
-Run: bundle update
-
-❗ Problem: PostgreSQL connection errors
-
-Ensure PostgreSQL is installed and running
-
-Check your config/database.yml
-
-Try: rails db:reset
-
-❗ Problem: Assets not loading
-
-Run: rails assets:precompile
-
-Ensure Tailwind or Bootstrap is configured properly
-
-❗ Problem: Flash messages misaligned
-
-Check for mt-3 on flash containers
-
-Use conditional margin if you're on the root path
-
+## 📸 Screenshots
 📸 Screenshots
 ![alt text](<Screenshot 2025-09-10 at 3.58.07 PM.png>)
 ![alt text](<Screenshot 2025-09-10 at 3.59.54 PM.png>)
 ![alt text](<Screenshot 2025-09-10 at 4.01.50 PM.png>)
 
-📂 Upload Form
+---
 
-📝 Record Detail + Translation
+## 🧪 System Design (ERD)
 
-🧪 System Design (ERD)
+```text
 User
 │
 ├── has_many :health_records
@@ -138,30 +148,33 @@ HealthRecord
 │
 Translation
 └── belongs_to :health_record
-
-📬 Contact
-
-Candide Mboungou-Kimpolo
-📧 mboungoukimpolo@gmail.com
-
-🌐 LinkedIn
-https://www.linkedin.com/in/candide-mboungou-kimpolo/
-
-📄 License
-
-MIT License © 2025 Candide Mboungou-Kimpolo
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files...
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED...
-
+```
 
 ---
 
-✅ Once you've pasted this into your `README.md` file, you can customize:
-- `https://github.com/your-username/medi-bridge.git` → your actual repo link
-- Screenshot paths if needed (`public/screenshots/home.png`)
-- Add more badges or CI instructions if you plan to deploy or test in CI/CD.
+## 📬 Contact
+
+Candide Mboungou-Kimpolo
+📧 candide@uic.edu
+
+🌐 LinkedIn
+
+## 📄 License
+
+MIT License © 2025 Candide Mboungou-Kimpolo
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+> The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+**THE SOFTWARE IS PROVIDED "AS IS"**, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
 
 Want me to generate this as a downloadable file (`README.md`) too?
 
