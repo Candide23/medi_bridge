@@ -84,9 +84,19 @@ Start the Rails server:
 rails server
 ```
 
-Then visit: [http://localhost:3000](http://localhost:3000)
+Then visit: [https://medi-bridge-s6s1.onrender.com](http://localhost:3000)
 
 ---
+
+## Demo Login
+
+To explore the app without creating a new account, you can use the demo credentials:
+
+- **Email:** password@example.com  
+- **Password:** password
+
+⚠️ *Note: These credentials are for demo/testing purposes only.*
+
 
 ## ✨ Features
 ```
