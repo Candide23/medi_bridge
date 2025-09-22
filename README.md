@@ -84,7 +84,7 @@ Start the Rails server:
 rails server
 ```
 
-Then visit: [https://medi-bridge-s6s1.onrender.com](http://localhost:3000)
+Then visit: [https://medi-bridge-s6s1.onrender.com](https://medi-bridge-s6s1.onrender.com)
 
 ---
 
