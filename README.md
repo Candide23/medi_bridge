@@ -11,6 +11,7 @@
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Demo Login](#-demo-login)
 - [Features](#features)
 - [Troubleshooting](#troubleshooting)
 - [Screenshots](#screenshots)
