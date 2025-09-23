@@ -1,4 +1,5 @@
 module TranslateServices
+# NOTE: You did a great job handling different file types and extracting value! Nice work Candide!
   class TextExtractor
     include ActiveModel::Model
     attr_accessor :health_record

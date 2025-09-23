@@ -29,7 +29,7 @@ class HealthRecord < ApplicationRecord
   validates :record_type, :language, presence: true
   validates :language, inclusion: { in: SUPPORTED_LANGUAGES.map(&:last) }
   validate :document_type_and_size
-
+  # NOTE: to even refactor this more you can use concerns or service objects to make model cleaner
   # Translation helper methods
   def translation_for(language_code)
     translations.find_by(language: language_code)

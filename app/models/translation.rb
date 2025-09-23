@@ -13,7 +13,8 @@ class Translation < ApplicationRecord
   # Scope for finding translations by language
   scope :for_language, ->(lang_code) { where(language: lang_code) }
 end
-
+# NOTE: repeating User model code!!!
+# This user model looks different than the other user model
 # app/models/user.rb
 class User < ApplicationRecord
   # Include default devise modules. Others available are:

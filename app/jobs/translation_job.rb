@@ -1,6 +1,8 @@
 class TranslationJob < ApplicationJob
   queue_as :default
-  
+  # NOTE: great way to look up the health record 
+  #and make a new translation using the translation service 
+  #and logging the translation so that it can be referenced
   def perform(health_record_id, target_locale, user_id = nil)
     health_record = HealthRecord.find(health_record_id)
     

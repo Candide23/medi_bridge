@@ -18,7 +18,8 @@ resources :translations, only: [:index, :show, :new, :create, :edit, :update, :d
   end
 end
 
-  
+# NOTE: make sure your consistent with indentation
+
   resources :translations
 
   # Home page
